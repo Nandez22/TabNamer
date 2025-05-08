@@ -7,18 +7,30 @@ export async function HashBrown(url) {
 }
 
 export async function StoreRename(url, name) {
-    const key = CleanUrl(url);
-
-    await chrome.storage.local.set({ [key]: { rename: name}});
+    await chrome.storage.local.set({ [url]: { rename: name}});
 }
 
 export async function TryLoadRename(url) {
+    const full = TryLoadFull(url);
+    return (full != null)? full : TryLoadGen(url); 
+}
+
+async function TryLoadFull(url){
     const key = CleanUrl(url)
     const result = await chrome.storage.local.get(key);
     const entry = result[key];
 
     return (entry && typeof entry.rename === "string")? entry.rename : null;
 }
+
+async function TryLoadGen(url){
+    const key = GenericUrl(url)
+    const result = await chrome.storage.local.get(key);
+    const entry = result[key];
+
+    return (entry && typeof entry.rename === "string")? entry.rename : null;
+}
+
 
 export function Rename(tab, name){
     if (!tab?.id || tab.url == "chrome://" || !name || name == tab.title) return;
@@ -30,9 +42,14 @@ export function Rename(tab, name){
     });
 }
 
-export function CleanUrl(url){
-    if(!url || url == "chrome://") return;
+export function CleanUrl(url) {
+    if(!url || url.startsWith("chrome://")) return;
 
     const u = new URL(url);
     return u.origin + u.pathname;
+}
+
+export function GenericUrl(url) {
+    if(!url || url.startsWith("chrome://")) return;
+    return new URL(url).hostname;
 }
