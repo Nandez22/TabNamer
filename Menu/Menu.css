@@ -1,85 +1,102 @@
 :root {
-    --inputSegW: 100px;
-    --txtInputW: 50px;
-    --togInputW: calc(var(--inputSegW) - var(--txtInputW) - var(--spacing));
+    --light: #e0e5ec;
+    --dark: #181818;
 
-    --spacing: 10px;
+    --height: 60px;
 }
 
 body {
-    background-color: #ac3737;
+    background: var(--dark)
 }
 
 .inline {
     display: flex;
-    align-items: center;
-    gap: var(--spacing)
-}
-
-.confirm {
-    width: var(--inputSegW);
 }
 
 .newName {
-    width: var(--txtInputW);
-}
+    height: var(--height);
+    width: 300px;
 
-.switch {
-    position: relative;
-    display: inline-block;
-    width: var(--togInputW);
-    height: 34px;
-}
+    color: #fff;
+    
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
 
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
+    border: none;
+    outline: none;
+    box-shadow:inset
+     0px 2px 2px 0px rgba(255,255,255,.5),
+     7px 7px 20px 0px rgba(0,0,0,.1),
+     4px 4px 5px 0px rgba(0,0,0,.1);
+    
+    background: transparent;
     cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
+
+    padding: 10px 25px;
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+
 }
 
-.slider.round {
-    border-radius: 34px;
+.button {
+    margin: 20px;
 }
+
+/* credit: @yuhomyan>  thanks for the button*/
+.confirm {
+    height: var(--height);
+    width: var(--height);
+    color: #fff;
+    
+    font-weight: 500;
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+
+    border: none;
+    outline: none;
+    box-shadow:inset
+     -2px 2px 2px 0px rgba(255,255,255,.5),
+     7px 7px 20px 0px rgba(0,0,0,.1),
+     4px 4px 5px 0px rgba(0,0,0,.1);
+    
+    background: transparent;
+    cursor: pointer;
+
+    padding: 10px 25px;
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+
+
+    transition: all 0.3s ease;
+  }
   
-.slider.round:before {
-    border-radius: 50%;
-}
-
-.slider:before {
+  .confirm:after {
     position: absolute;
     content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-}
+    width: 0;
+    height: 100%;
+    top: 0;
+    left: 0;
+    direction: rtl;
+    z-index: -1;
+    box-shadow:
+     -7px -7px 20px 0px #fff9,
+     -4px -4px 5px 0px #fff9,
+     7px 7px 20px 0px #0002,
+     4px 4px 5px 0px #0001;
+    transition: all 0.3s ease;
+  }
+  .confirm:hover {
+    color: #000;
+  }
+  .confirm:hover:after {
+    left: 0;
+    right: auto;
+    width: 100%;
+  }
 
-input:checked + .slider {
-    background-color: #2196F3;
-}
-
-input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
-}
-  
+  .confirm:active {
+    top: 2px;
+  }
