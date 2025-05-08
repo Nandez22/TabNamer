@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "TabNamer",
-    "version": "0.1",
+    "version": "0.2",
 
     "description": "Renames Tabs. What did you expect it to do?",
 
@@ -14,11 +14,11 @@
         "default_icon": { "48": "Icons/Icon48.jpg" }
     },
 
-    "content_scripts": [{
-        "matches": ["<all_urls>"],
-        "js": ["Background.js"]
-    }],
+    "background": {
+        "service_worker": "Scripts/Background.js",
+        "type": "module"
+    },
 
-    "permissions": ["tabs", "scripting"],
+    "permissions": ["tabs", "scripting", "storage"],
     "host_permissions": ["<all_urls>"]
 }
