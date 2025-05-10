@@ -1,3 +1,4 @@
-# TAB NAMER
+# TABS.
 
-Browser extension to rename your tabs. What else did you think it would do?
+Manifest V3 - Compatible with chromium based browsers
+Manifest V2 - Compatible with firefox
